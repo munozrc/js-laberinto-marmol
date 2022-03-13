@@ -9,6 +9,10 @@
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
-    "parcel": "2.3.2"
+    "parcel": "2.3.2",
+    "standard": "16.0.4"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
