@@ -22,14 +22,23 @@ class GameComponent extends window.HTMLElement {
 
   connectedCallback () {
     this.render()
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', (e) => {
-        this.values = `alpha: ${e.alpha}, beta: ${e.beta}, gamma: ${e.gamma}`
-        this.render()
-      }, false)
-    } else {
-      console.log('Not supported')
-    }
+    if (!window.DeviceOrientationEvent) return console.log('Not support')
+    window.addEventListener('deviceorientation', (e) => {
+      // this.values = `alpha: ${e.alpha}, beta: ${e.beta}, gamma: ${e.gamma}`
+
+      const x = Math.floor(e.beta)
+      const y = Math.floor(e.gamma)
+
+      if (x > 0) this.values = 'DERECHA'
+      else if (x < 0) this.values = 'IZQUIERDA'
+
+      if (y > 0) this.values = 'ARRIBA'
+      else if (y < 0) this.values = 'ABAJO'
+
+      this.values = 'CENTRADO'
+
+      this.render()
+    }, false)
   }
 
   render () {
