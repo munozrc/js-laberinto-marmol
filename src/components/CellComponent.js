@@ -7,8 +7,9 @@ class CellComponent extends window.HTMLElement {
   static get styles () {
     return /* css */`
       :host {
-        padding: 7px;
-        transition: opacity 0.3s ease-out 0s;
+        padding: 3px;
+        transition: opacity 0.3s ease-out;
+        opacity: 0.2;
       }
 
       .cell {
