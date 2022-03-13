@@ -31,8 +31,7 @@ class GameComponent extends window.HTMLElement {
 
       if (x > 0) this.values = 'DERECHA'
       else if (x < 0) this.values = 'IZQUIERDA'
-
-      if (y > 0) this.values = 'ARRIBA'
+      else if (y > 0) this.values = 'ARRIBA'
       else if (y < 0) this.values = 'ABAJO'
 
       this.values = 'CENTRADO'
