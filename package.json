@@ -1,0 +1,14 @@
+{
+  "name": "laberinto-marmol",
+  "version": "1.0.0",
+  "author": "munozrc",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "2.3.2"
+  }
+}
