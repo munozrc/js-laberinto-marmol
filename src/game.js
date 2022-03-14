@@ -1,3 +1,4 @@
+import boards from './boards.js'
 import './styles.css'
 
 const boardElement = document.querySelector('.board__container')
@@ -5,18 +6,9 @@ const boardElement = document.querySelector('.board__container')
 let x = 0
 let y = 0
 let lastExecution = 0
+let level = 0
+let board = boards[level]
 const velocity = 55
-
-const board = [
-  ['B', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', 'T', ''],
-  ['', 'O', 'O', '', '', '', '', ''],
-  ['', 'O', 'O', 'T', '', '', '', ''],
-  ['', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', ''],
-  ['', '', '', '', '', '', '', ''],
-  ['', 'T', '', '', '', '', '', 'T']
-]
 
 window.addEventListener('deviceorientation', (event) => {
   // Limit reading time
@@ -41,6 +33,9 @@ window.addEventListener('deviceorientation', (event) => {
   // Collide if the next cell is an obstacle
   if (currentCell === 'O') return
 
+  // Load new level
+  if (currentCell === 'T' && level < 3) return loadBoard()
+
   // Do not change position if out of bounds
   if (posX < 8 && posX >= 0) x = posX
   if (posY < 8 && posY >= 0) y = posY
@@ -51,6 +46,27 @@ window.addEventListener('deviceorientation', (event) => {
   // Render new board
   loadCellElements()
 }, true)
+
+const loadBoard = () => {
+  // Check level size
+  if (level > boards.length) return
+
+  level++
+  board = boards[level]
+
+  // Set new player position
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; i++) {
+      if (board[i][j] === 'B') {
+        x = i
+        y = j
+      }
+    }
+  }
+
+  // Render new board
+  loadCellElements()
+}
 
 const loadCellElements = () => {
   boardElement.innerHTML = `
