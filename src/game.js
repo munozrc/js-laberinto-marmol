@@ -2,6 +2,7 @@ import boards from './boards.js'
 import './styles.css'
 
 const boardElement = document.querySelector('.board__container')
+const levelElement = document.querySelector('.level')
 
 let x = 0
 let y = 0
@@ -52,6 +53,7 @@ const loadBoard = () => {
   if (level > boards.length) return
 
   level++
+  levelElement.textContent = level
   board = boards[level]
 
   // Set new player position
@@ -76,4 +78,6 @@ const loadCellElements = () => {
   `
 }
 
+// Start game
+levelElement.textContent = level
 loadCellElements()
