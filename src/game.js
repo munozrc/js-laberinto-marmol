@@ -1,3 +1,4 @@
+import confetti from 'canvas-confetti'
 import boards from './boards.js'
 import './styles.css'
 
@@ -9,12 +10,12 @@ let y = 0
 let lastExecution = 0
 let level = 0
 let board = boards[level]
-const velocity = 55
+let statusGame = ''
 
 window.addEventListener('deviceorientation', (event) => {
   // Limit reading time
   const now = Date.now()
-  if (now - lastExecution < velocity) return true
+  if (now - lastExecution < 55 || statusGame === 'WIN') return
   lastExecution = now
 
   // reset previous cell
@@ -35,7 +36,7 @@ window.addEventListener('deviceorientation', (event) => {
   if (currentCell === 'O') return
 
   // Load new level
-  if (currentCell === 'T' && level < 3) return loadBoard()
+  if (currentCell === 'T' && level < 3) loadBoard()
 
   // Do not change position if out of bounds
   if (posX < 8 && posX >= 0) x = posX
@@ -50,7 +51,11 @@ window.addEventListener('deviceorientation', (event) => {
 
 const loadBoard = () => {
   // Check level size
-  if (level > boards.length) return
+  if (level >= boards.length - 1) {
+    statusGame = 'WIN'
+    confetti()
+    return
+  }
 
   level++
   levelElement.textContent = level

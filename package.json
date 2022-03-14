@@ -14,5 +14,8 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "dependencies": {
+    "canvas-confetti": "1.5.1"
   }
 }
