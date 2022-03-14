@@ -12,21 +12,22 @@ let level = 0
 let board = boards[level]
 let statusGame = ''
 
-window.addEventListener('deviceorientation', (event) => {
+window.addEventListener('devicemotion', (event) => {
   // Limit reading time
   const now = Date.now()
-  if (now - lastExecution < 55 || statusGame === 'WIN') return
+  if (now - lastExecution < 85 || statusGame === 'WIN') return
   lastExecution = now
 
   // reset previous cell
   board[x][y] = ''
 
   const directions = { x: 0, y: 0 }
+  const { accelerationIncludingGravity: acceleration } = event
 
-  if (event.gamma < -5) directions.y = -1
-  else if (event.gamma > 5) directions.y = 1
-  else if (event.beta < -5) directions.x = -1
-  else if (event.beta > 5) directions.x = 1
+  if (acceleration.x < -1) directions.y = 1
+  else if (acceleration.x > 1) directions.y = -1
+  else if (acceleration.y < -1) directions.x = -1
+  else if (acceleration.y > 1) directions.x = 1
 
   const posX = x + directions.x
   const posY = y + directions.y
